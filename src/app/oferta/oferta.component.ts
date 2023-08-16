@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Oferta } from '../shared/oferta.model';
 import { OfertasService } from '../ofertas.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class OfertaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('id:', this.route.snapshot.params['id']);
     this.ofertasService.getOfertaPorId(this.route.snapshot.params['id'])
+    .then((result: Oferta) => { 
+      console.log(result);
+    } )
   }
+
 }

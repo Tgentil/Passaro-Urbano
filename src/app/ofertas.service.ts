@@ -23,7 +23,6 @@ public getOfertaPorId(id: number): Promise<Oferta> {
   
   return firstValueFrom(observable)
     .then((result: Oferta) => {
-      console.log(result);
       return result;
     });
 }
