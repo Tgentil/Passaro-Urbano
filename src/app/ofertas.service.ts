@@ -18,4 +18,15 @@ export class OfertasService {
     return firstValueFrom(observable);
 }
 
+public getOfertaPorId(id: number): Promise<Oferta> {
+  const observable = this.http.get<Oferta>(`http://localhost:3000/ofertas/${id}`);
+  
+  return firstValueFrom(observable)
+    .then((result: Oferta) => {
+      console.log(result);
+      return result;
+    });
+}
+
+
 }
