@@ -18,7 +18,6 @@ export class DiversaoComponent implements OnInit {
       .getOfertasPorCategoria('diversao')
       .then((ofertas: Oferta[]) => {
         this.ofertas = ofertas;
-        console.log(ofertas);
       });
   }
 }
