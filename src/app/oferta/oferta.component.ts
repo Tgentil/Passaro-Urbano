@@ -11,7 +11,7 @@ import { OfertasService } from '../ofertas.service';
 })
 export class OfertaComponent implements OnInit {
 
-  public oferta: Oferta = {} as Oferta;
+  public oferta?: Oferta;
 
   constructor(
     private route: ActivatedRoute,
