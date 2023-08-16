@@ -14,7 +14,10 @@ constructor( private route: ActivatedRoute  ) {
 
 
 ngOnInit() {
-  console.log('id:', this.route.snapshot.params['id'])
+  // console.log('id:', this.route.snapshot.params['id'])
+  this.route.params.subscribe((parametros: any) => {
+    console.log(parametros.id)
+  })
   }
 
 }
