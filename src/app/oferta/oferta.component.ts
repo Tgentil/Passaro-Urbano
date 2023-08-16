@@ -10,6 +10,9 @@ import { OfertasService } from '../ofertas.service';
   providers: [OfertasService],
 })
 export class OfertaComponent implements OnInit {
+
+  public oferta: Oferta = {} as Oferta;
+
   constructor(
     private route: ActivatedRoute,
     private ofertasService: OfertasService
@@ -18,7 +21,7 @@ export class OfertaComponent implements OnInit {
   ngOnInit() {
     this.ofertasService.getOfertaPorId(this.route.snapshot.params['id'])
     .then((result: Oferta) => { 
-      console.log(result);
+      this.oferta = result;
     } )
   }
 
