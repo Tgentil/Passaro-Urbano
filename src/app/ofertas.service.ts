@@ -29,12 +29,20 @@ export class OfertasService {
     });
   }
   public getComoUsarOfertaPorId(id: number): Promise<string> {
-    const observable = this.http.get<{ id: number, descricao: string }[]>(`${URL_API}/como-usar?id=${id}`);
-    return firstValueFrom(observable)
-      .then(resultArray => {
-        // console.log(resultArray[0].descricao);
-        return resultArray[0].descricao;
-      });
+    const observable = this.http.get<{ id: number; descricao: string }[]>(
+      `${URL_API}/como-usar?id=${id}`
+    );
+    return firstValueFrom(observable).then((resultArray) => {
+      return resultArray[0].descricao;
+    });
   }
-  
+
+  public getOndeFicaOfertaPorId(id: number): Promise<string> {
+    const observable = this.http.get<{ id: number; descricao: string }[]>(
+      `${URL_API}/onde-fica?id=${id}`
+    );
+    return firstValueFrom(observable).then((resultArray) => {
+      return resultArray[0].descricao;
+    });
+  }
 }
