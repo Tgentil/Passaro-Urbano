@@ -19,10 +19,11 @@ export class OfertasService {
   }
 
   public getOfertaPorId(id: number): Promise<Oferta> {
-    const observable = this.http.get<Oferta>(`${URL_API}?id=${id}`);
+    const observable = this.http.get<Oferta[]>(`${URL_API}?id=${id}`);
     return firstValueFrom(observable)
-      .then((result: Oferta) => {
-        return result;
+      .then((result: Oferta[]) => {
+        return result[0];
       });
   }
+  
 }
