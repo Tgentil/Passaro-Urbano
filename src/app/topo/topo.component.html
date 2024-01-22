@@ -8,7 +8,14 @@
           </a>
         </div>
         <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="Pesquise por ofertas..." />
+          <input type="text"
+          class="form-control"
+          placeholder="Pesquise por ofertas..."
+          [(ngModel)]="termoDaBusca"
+          (keyup)="pesquisa(termoDaBusca)"  />
+          <ul class="list-group" style="position:absolute">
+            <li class="list-group-item" *ngFor="let oferta of ofertas2" >{{ oferta.titulo }}</li>
+          </ul>
         </div>
         <div class="col-md-2">
           <a href="#"><img src="/assets/carrinho.png" alt="Carrinho" /></a>
