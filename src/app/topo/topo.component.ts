@@ -24,22 +24,19 @@ export class TopoComponent implements OnInit {
       debounceTime(1000),
       distinctUntilChanged(),
       switchMap((termo: string) => {
-        console.log('requisição http para a api');
 
         if (termo.trim() === '') {
           return of<Oferta[]>([]);
         }
         return this.ofertasService.pesquisaOfertas(termo);
       }),
-      catchError((err) => {
-        console.error(err);
+      catchError(() => {
         return of<Oferta[]>([]);
       })
     );
 
   }
   public pesquisa(termoDaBusca: string): void {
-    console.log('keyup caracter: ', termoDaBusca);
     this.subjectPesquisa.next(termoDaBusca);
   }
 }
