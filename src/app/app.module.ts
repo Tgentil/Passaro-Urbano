@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 import { ROUTES } from './app.routes';
 
@@ -17,6 +19,11 @@ import { OfertaComponent } from './oferta/oferta.component';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 
+//pipe
+import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
+
+registerLocaleData(localePt);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +35,7 @@ import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
     OfertaComponent,
     ComoUsarComponent,
     OndeFicaComponent,
+    DescricaoReduzida
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,7 @@ import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
     FormsModule,
     RouterModule.forRoot(ROUTES),
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
