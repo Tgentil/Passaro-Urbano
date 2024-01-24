@@ -15,7 +15,6 @@ export class TopoComponent implements OnInit {
   termoDaBusca: string = ''; 
 
   public ofertas!: Observable<Oferta[]>
-  public ofertas2!: Oferta[];
   private subjectPesquisa: Subject<string> = new Subject<string>();
 
   constructor(private ofertasService: OfertasService) { }
@@ -38,14 +37,6 @@ export class TopoComponent implements OnInit {
       })
     );
 
-    this.ofertas.subscribe({
-      next: (ofertas) => {
-        console.log(ofertas);
-        this.ofertas2 = ofertas; 
-      },
-      error: (erro) => console.error('Erro no subscribe: ', erro),
-      complete: () => console.log('Fluxo de eventos completo')
-    });
   }
   public pesquisa(termoDaBusca: string): void {
     console.log('keyup caracter: ', termoDaBusca);
