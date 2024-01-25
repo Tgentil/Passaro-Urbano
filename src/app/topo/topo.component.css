@@ -2,6 +2,11 @@
     background: #006ACB
 }
 
+.navbar {
+    background: #FFF
+
+}
+
 .nav-link {
     color: #C1E4FF
 }
@@ -11,7 +16,7 @@
 }
 
 .banner {
-    margin-top: 130px;
+    margin-top: 100px;
 }
 
 .banner img {
