@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Oferta } from '../shared/oferta.model';
-import { OfertasService } from '../ofertas.service';
+import { OfertasService } from '../services/ofertas.service';
 
 @Component({
   selector: 'app-diversao',
@@ -22,5 +22,4 @@ export class DiversaoComponent implements OnInit {
   }
 }
 {
-
 }

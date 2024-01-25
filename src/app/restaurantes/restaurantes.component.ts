@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Oferta } from '../shared/oferta.model';
-import { OfertasService } from '../ofertas.service';
+import { OfertasService } from '../services/ofertas.service';
 
 @Component({
   selector: 'app-restaurantes',
@@ -8,7 +8,6 @@ import { OfertasService } from '../ofertas.service';
   styleUrls: ['./restaurantes.component.css'],
   providers: [OfertasService],
 })
-
 export class RestaurantesComponent implements OnInit {
   public ofertas!: Oferta[];
 
