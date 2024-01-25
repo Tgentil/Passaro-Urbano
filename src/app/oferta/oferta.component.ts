@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Oferta } from '../shared/oferta.model';
 import { OfertasService } from '../services/ofertas.service';
+import { TabService } from '../services/tab-manager.service';
 
 @Component({
   selector: 'app-oferta',
@@ -9,12 +10,13 @@ import { OfertasService } from '../services/ofertas.service';
   styleUrls: ['./oferta.component.css'],
   providers: [OfertasService],
 })
-export class OfertaComponent implements OnInit, OnDestroy {
+export class OfertaComponent implements OnInit {
   public oferta?: Oferta;
 
   constructor(
     private route: ActivatedRoute,
-    private ofertasService: OfertasService
+    private ofertasService: OfertasService,
+    private tabService: TabService
   ) {}
 
   ngOnInit() {
@@ -24,8 +26,16 @@ export class OfertaComponent implements OnInit, OnDestroy {
         .then((oferta: Oferta) => {
           this.oferta = oferta;
         });
+      this.tabService.setActiveTab('como-usar');
     });
   }
 
-  ngOnDestroy(): void {}
+  setActiveTab(tab: string): void {
+    this.tabService.setActiveTab(tab);
+  }
+
+  getActiveTab() {
+    return this.tabService.getActiveTab();
+  }
+
 }

@@ -1,13 +1,5 @@
 <div class="container">
   <div class="oferta" *ngIf="oferta !== undefined">
-    <!-- <div class="row">
-      <div class="col">
-        <a [routerLink]="['/oferta', 1]"> Oferta 1 </a>
-        <a [routerLink]="['/oferta', 3]"> Oferta 3 </a>
-        <a [routerLink]="['/oferta', 6]"> Oferta 6 </a>
-      </div>
-    </div>
-    -->
 
     <div class="row">
       <div class="col">
@@ -55,13 +47,13 @@
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link active"
-            href="como-usar"
+            class="nav-link"
+            [ngClass]="{'active': (getActiveTab() | async) === 'como-usar'}"
+            (click)="setActiveTab('como-usar')"
             routerLink="como-usar"
             data-bs-toggle="tab"
             type="button"
             role="tab"
-            aria-selected="true"
           >
             Como usar
           </button>
@@ -69,12 +61,12 @@
         <li class="nav-item" role="presentation">
           <button
             class="nav-link"
-            href="onde-fica"
+            [ngClass]="{'active': (getActiveTab() | async) === 'onde-fica'}"
+            (click)="setActiveTab('onde-fica')"
             routerLink="onde-fica"
             data-bs-toggle="tab"
             type="button"
             role="tab"
-            aria-selected="false"
           >
             Onde fica?
           </button>
@@ -85,4 +77,3 @@
       </div>
     </div>
   </div>
-</div>
