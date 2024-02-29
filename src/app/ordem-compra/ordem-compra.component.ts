@@ -18,11 +18,19 @@ export class OrdemCompraComponent implements OnInit {
   public complementoValido: boolean = false;
   public formaPagamentoValido: boolean = false;
 
+  public enderecoEstadoPrimitivo: boolean = true;
+  public numeroEstadoPrimitivo: boolean = true;
+  public formaPagamentoEstadoPrimitivo: boolean = true;
+
+
+  constructor() {}
+
   ngOnInit(): void {}
 
   public atualizaEndereco(endereco: string): void {
     this.endereco = endereco;
-    console.log(this.endereco);
+
+    this.enderecoEstadoPrimitivo = false;
 
     if (this.endereco.length > 3) {
       this.enderecoValido = true;
@@ -31,11 +39,13 @@ export class OrdemCompraComponent implements OnInit {
     }
   }
 
-public atualizaNumero(numero: string): void {
+  public atualizaNumero(numero: string): void {
     this.numero = numero;
-    console.log(this.numero);
 
-    if (this.numero.length > 0) {
+    this.numeroEstadoPrimitivo = false;
+
+    const regex = /\d/;
+    if (regex.test(this.numero)) {
       this.numeroValido = true;
     } else {
       this.numeroValido = false;
@@ -44,18 +54,16 @@ public atualizaNumero(numero: string): void {
 
   public atualizaComplemento(complemento: string): void {
     this.complemento = complemento;
-    console.log(this.complemento);
 
     if (this.complemento.length > 0) {
       this.complementoValido = true;
-    } else {
-      this.complementoValido = false;
     }
   }
 
   public atualizaFormaPagamento(formaPagamento: string): void {
     this.formaPagamento = formaPagamento;
-    console.log(this.formaPagamento);
+
+    this.formaPagamentoEstadoPrimitivo = false;
 
     if (this.formaPagamento.length > 0) {
       this.formaPagamentoValido = true;

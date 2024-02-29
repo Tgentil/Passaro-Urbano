@@ -79,7 +79,11 @@
           <input
             type="text"
             class="form-control {{
-              enderecoValido ? 'is-valid' : 'is-invalid'
+              enderecoEstadoPrimitivo
+                ? ''
+                : enderecoValido
+                ? 'is-valid'
+                : 'is-invalid'
             }}"
             placeholder="Endereço"
             autocomplete="off"
@@ -97,7 +101,13 @@
         <div class="form-group col-md-2">
           <input
             type="text"
-            class="form-control {{ numeroValido ? 'is-valid' : 'is-invalid' }} "
+            class="form-control {{
+              numeroEstadoPrimitivo
+                ? ''
+                : numeroValido
+                ? 'is-valid'
+                : 'is-invalid'
+            }} "
             placeholder="Número"
             autocomplete="off"
             minlength="1"
@@ -106,16 +116,15 @@
             #inputNumero
             (input)="atualizaNumero(inputNumero.value)"
           />
-          <br />
-          <small class="form-text text-muted">Ok</small>
+          <div class="invalid-feedback">Número inválido</div>
         </div>
+
+        <br />
 
         <div class="form-group col-md-4">
           <input
             type="text"
-            class="form-control {{
-              complementoValido ? 'is-valid' : 'is-invalid'
-            }}"
+            class="form-control {{ complementoValido ? 'is-valid' : '' }}"
             placeholder="Complemento"
             autocomplete="off"
             [value]="complemento"
@@ -124,16 +133,21 @@
           />
         </div>
       </div>
+
       <br />
 
       <h5>Dados de pagamento</h5>
       <hr />
 
       <div class="form-row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <select
             class="form-control {{
-              formaPagamentoValido ? 'is-valid' : 'is-invalid'
+              formaPagamentoEstadoPrimitivo
+                ? ''
+                : formaPagamentoValido
+                ? 'is-valid'
+                : 'is-invalid'
             }}"
             #selectFormaPagamento
             (change)="atualizaFormaPagamento(selectFormaPagamento.value)"
