@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdemCompraService } from '../ordem-compra.service'; 
+import { OrdemCompraService } from '../ordem-compra.service';
+import { Pedido } from '../shared/pedido.model';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -7,9 +8,11 @@ import { OrdemCompraService } from '../ordem-compra.service';
   imports: [],
   templateUrl: './ordem-compra.component.html',
   styleUrl: './ordem-compra.component.css',
-  providers: [OrdemCompraService]
+  providers: [OrdemCompraService],
 })
 export class OrdemCompraComponent implements OnInit {
+  public pedido: Pedido = new Pedido('', '', '', '');
+
   public endereco: string = '';
   public numero: string = '';
   public complemento: string = '';
@@ -29,7 +32,7 @@ export class OrdemCompraComponent implements OnInit {
   constructor(private ordemCompraService: OrdemCompraService) {}
 
   ngOnInit() {
-    this.ordemCompraService.efetivarCompra();
+    // this.ordemCompraService.efetivarCompra();
   }
 
   public atualizaEndereco(endereco: string): void {
@@ -72,7 +75,7 @@ export class OrdemCompraComponent implements OnInit {
     this.formaPagamento = formaPagamento;
 
     this.formaPagamentoEstadoPrimitivo = false;
-    this.formaPagamentoValido = this.formaPagamento !== "";
+    this.formaPagamentoValido = this.formaPagamento !== '';
 
     if (this.formaPagamento.length > 0) {
       this.formaPagamentoValido = true;
@@ -83,10 +86,33 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   public habilitaForm(): void {
-    if ( this.enderecoValido == true && this.numeroValido == true && this.complementoValido == true && this.formaPagamentoValido == true) {
+    if (
+      this.enderecoValido == true &&
+      this.numeroValido == true &&
+      this.complementoValido == true &&
+      this.formaPagamentoValido == true
+    ) {
       this.formEstado = '';
     } else {
       this.formEstado = 'disabled';
     }
+  }
+
+  public confirmarCompra(): void {
+    this.pedido.endereco = this.endereco;
+    this.pedido.numero = this.numero;
+    this.pedido.complemento = this.complemento;
+    this.pedido.formaPagamento = this.formaPagamento;
+
+    this.ordemCompraService.efetivarCompra(this.pedido)
+      .subscribe({
+        next: (resposta) => {
+          console.log('Compra efetivada com sucesso!', resposta);
+          // Adicione o que fazer após a confirmação da compra
+        },
+        error: (erro) => {
+          console.error('Erro ao efetivar compra:', erro);
+        }
+      });
   }
 }
