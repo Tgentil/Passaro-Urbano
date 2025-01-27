@@ -11,11 +11,13 @@ import { Pedido } from './shared/pedido.model';
 export class OrdemCompraService {
   constructor(private http: HttpClient) {}
 
-  public efetivarCompra(pedido: Pedido): Observable<any> {
+  public efetivarCompra(pedido: Pedido): Observable<string> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-type', 'application/json');
 
-    return this.http.post(`${URL_API}/pedidos`, JSON.stringify(pedido), { headers: headers })
-      .pipe(map((resposta: any) => resposta));
+    return this.http.post<{id: string}>(`${URL_API}/pedidos`, JSON.stringify(pedido), { headers: headers })
+      .pipe(
+        map((resposta) => resposta.id)
+      );
   }
 }

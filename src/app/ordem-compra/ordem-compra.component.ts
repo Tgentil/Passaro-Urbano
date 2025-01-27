@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+
 import { OrdemCompraService } from '../ordem-compra.service';
 import { Pedido } from '../shared/pedido.model';
+import { OrdemCompraSucessoComponent } from '../ordem-compra-sucesso/ordem-compra-sucesso.component';
 
 @Component({
   selector: 'app-ordem-compra',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, OrdemCompraSucessoComponent],
   templateUrl: './ordem-compra.component.html',
   styleUrl: './ordem-compra.component.css',
   providers: [OrdemCompraService],
 })
 export class OrdemCompraComponent implements OnInit {
+
+  public idPedidoCompra!: string;
+
   public pedido: Pedido = new Pedido('', '', '', '');
 
   public endereco: string = '';
@@ -106,9 +113,8 @@ export class OrdemCompraComponent implements OnInit {
 
     this.ordemCompraService.efetivarCompra(this.pedido)
       .subscribe({
-        next: (resposta) => {
-          console.log('Compra efetivada com sucesso!', resposta);
-          // Adicione o que fazer após a confirmação da compra
+        next: (idPedido) => {
+          this.idPedidoCompra = idPedido;
         },
         error: (erro) => {
           console.error('Erro ao efetivar compra:', erro);
