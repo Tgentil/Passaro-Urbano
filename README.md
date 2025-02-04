@@ -1,6 +1,6 @@
 # Pássaro Urbano
 
-Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.1.3.
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.1.3 e atualizado para a versão 18.2.1.
 
 ## Executando o Banco de Dados
 
