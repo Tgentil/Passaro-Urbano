@@ -15,16 +15,21 @@
             [(ngModel)]="termoDaBusca"
             (keyup)="pesquisa(termoDaBusca)"
           />
-          <ul class="list-group" style="position: absolute; z-index: 999;">
+          <ul class="list-group" style="position: absolute; z-index: 999">
             <li class="list-group-item" *ngFor="let oferta of ofertas | async">
-              <a [routerLink]="['/oferta', oferta.id]" (click)="limpaPesquisa()">
+              <a
+                [routerLink]="['/oferta', oferta.id]"
+                (click)="limpaPesquisa()"
+              >
                 {{ oferta.titulo | descricaoReduzida : 15 }}
               </a>
             </li>
           </ul>
         </div>
         <div class="col-md-2">
-          <a href="/ordem-compra"><img src="/assets/carrinho.png" alt="Carrinho" routerLinkActive="active" routerLink="/ordem-compra" /></a>
+          <a routerLinkActive="active" routerLink="/ordem-compra"
+            ><img src="/assets/carrinho.png" alt="Carrinho"
+          /></a>
         </div>
       </div>
     </div>
