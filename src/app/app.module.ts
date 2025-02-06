@@ -9,6 +9,8 @@ import { registerLocaleData } from '@angular/common';
 
 import { ROUTES } from './app.routes';
 
+import { CarrinhoService } from './carrinho.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopoComponent } from './topo/topo.component';
@@ -40,7 +42,7 @@ registerLocaleData(localePt);
     OndeFicaComponent,
     DescricaoReduzida,
     OrdemCompraComponent,
-    OrdemCompraSucessoComponent
+    OrdemCompraSucessoComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,10 @@ registerLocaleData(localePt);
     FormsModule,
     RouterModule.forRoot(ROUTES),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+  providers: [
+    CarrinhoService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
