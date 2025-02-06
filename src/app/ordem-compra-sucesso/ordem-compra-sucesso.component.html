@@ -1,14 +1,14 @@
-<div class="container">
-  <div class="row" style="margin-top: 50px">
-    <div class="col d-flex justify-content-center">
-        <h3>Compra realizada com sucesso!</h3>
+<div class="container success-container">
+  <div class="row">
+    <div class="col d-flex flex-column align-items-center text-center">
+      <div class="success-icon">
+        ✔
+      </div>
+      <h3 class="success-title">Compra realizada com sucesso!</h3>
+      <p class="success-text">
+        O ID do seu pedido é: <b class="pedido-id">{{ idPedidoCompra }}</b>
+      </p>
+      <a href="/" class="btn btn-primary mt-3">Voltar para a página inicial</a>
     </div>
   </div>
-  
-  <div class="row" style="margin-top: 50px">
-      <div class="col d-flex justify-content-center">
-          <p>O Id do seu pedido é <b> {{idPedidoCompra}} </b></p>
-      </div>
-    </div>
-  
 </div>
