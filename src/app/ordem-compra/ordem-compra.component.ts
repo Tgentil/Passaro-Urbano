@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrdemCompraService } from '../ordem-compra.service';
 import { Pedido } from '../shared/pedido.model';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -9,27 +9,54 @@ import { NgForm } from '@angular/forms';
   styleUrl: './ordem-compra.component.css',
   providers: [OrdemCompraService],
 })
+
 export class OrdemCompraComponent implements OnInit {
 
-  @ViewChild('formulario') public f!: NgForm;
-
   public idPedidoCompra!: string;
+
+  public formulario: FormGroup = new FormGroup({
+    endereco: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(120),
+    ]),
+    numero: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(20),
+    ]),
+    complemento: new FormControl(null),
+    formaPagamento: new FormControl(null, [Validators.required]),
+  });
 
   constructor(private ordemCompraService: OrdemCompraService) {}
 
   ngOnInit() {}
 
   public confirmarCompra(): void {
-    let pedido: Pedido = new Pedido(
-      this.f.value.endereco,
-      this.f.value.numero,
-      this.f.value.complemento,
-      this.f.value.formaPagamento
-    );
+    if (this.formulario.status === 'INVALID') {
+      console.log('Formulário inválido');
 
-    this.ordemCompraService.efetivarCompra(pedido)
-    .subscribe((idPedido: string) => {
-      this.idPedidoCompra = idPedido;
-    });
+      this.formulario.get('endereco')?.markAsTouched();
+      this.formulario.get('numero')?.markAsTouched();
+      this.formulario.get('complemento')?.markAsTouched();
+      this.formulario.get('formaPagamento')?.markAsTouched();
+    } else {
+      console.log(this.formulario.value);
+      let pedido: Pedido = new Pedido(
+        this.formulario.value.endereco,
+        this.formulario.value.numero,
+        this.formulario.value.complemento,
+        this.formulario.value.formaPagamento
+      );
+      this.ordemCompraService
+        .efetivarCompra(pedido)
+        .subscribe((idPedido: string) => {
+          console.log(
+            'Pedido cadastrado com sucesso. Número do pedido: ' + idPedido
+          );
+          this.idPedidoCompra = idPedido;
+        });
+    }
   }
 }
