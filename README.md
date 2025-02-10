@@ -1,6 +1,7 @@
 # Pássaro Urbano - Marketplace de Ofertas
 
 [![GitHub](https://img.shields.io/badge/Visite-Meu%20Perfil-0891B2?style=flat-square&logo=github)](https://github.com/Tgentil)
+[![Website](https://img.shields.io/badge/🌍&nbsp;&nbsp;Visite-Website-4285f4?style=flat-square&logo=globe)](http://app2-teste-publicaco-passaro-urbano.s3-website-sa-east-1.amazonaws.com)
 [![Curso Udemy](https://img.shields.io/badge/Udemy-Curso-blue?style=flat-square&logo=udemy)](https://www.udemy.com/course/curso-de-desenvolvimento-web-com-es6-typescript-e-angular-4/)
 [![Instrutor](https://img.shields.io/badge/👨🏻‍🏫&nbsp;Instrutor-Jorge%20Sant´Ana-yellow?style=flat-square&logo=website)](https://jorgesantana.net.br/)
 
