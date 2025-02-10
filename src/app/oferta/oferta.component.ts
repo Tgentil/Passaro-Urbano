@@ -43,7 +43,6 @@ export class OfertaComponent implements OnInit {
 
   adicionarItemCarrinho(oferta: Oferta): void {
     this.carrinhoService.incluirItem(oferta);
-    console.log(this.carrinhoService.exibirItens());
   }
 
 }

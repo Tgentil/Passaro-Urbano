@@ -51,7 +51,6 @@ export class OrdemCompraComponent implements OnInit {
       if (this.carrinhoService.exibirItens().length === 0) {
         alert('Você não selecionou nenhum item');
       } else {
-        console.log(this.formulario.value);
         let pedido: Pedido = new Pedido(
           this.formulario.value.endereco,
           this.formulario.value.numero,
