@@ -18,7 +18,6 @@ class CarrinhoService {
       1
     );
 
-    // verificar se o item em questão já não existe dentro de this.itens
     let itemCarrinhoEncontrado = this.itens.find(
       (item: ItemCarrinho) => item.id === itemCarrinho.id
     );
@@ -58,14 +57,14 @@ class CarrinhoService {
       itemCarrinhoEncontrado.quantidade -= 1;
 
       if (itemCarrinhoEncontrado.quantidade === 0) {
-        this.itens.splice(
-          this.itens.indexOf(itemCarrinhoEncontrado),
-          1
-        );
+        this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1);
       }
     }
   }
 
+  public limparCarrinho(): void {
+    this.itens = [];
+  }
 }
 
 export { CarrinhoService };

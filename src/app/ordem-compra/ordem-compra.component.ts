@@ -14,7 +14,6 @@ import { ItemCarrinho } from '../shared/item-carrinho.model';
   providers: [OrdemCompraService],
 })
 export class OrdemCompraComponent implements OnInit {
-
   public idPedidoCompra!: string;
   public itensCarrinho: ItemCarrinho[] = [];
 
@@ -40,33 +39,33 @@ export class OrdemCompraComponent implements OnInit {
 
   ngOnInit() {
     this.itensCarrinho = this.carrinhoService.exibirItens();
-    console.log(this.itensCarrinho);
   }
 
   public confirmarCompra(): void {
     if (this.formulario.status === 'INVALID') {
-      console.log('Formulário inválido');
-
       this.formulario.get('endereco')?.markAsTouched();
       this.formulario.get('numero')?.markAsTouched();
       this.formulario.get('complemento')?.markAsTouched();
       this.formulario.get('formaPagamento')?.markAsTouched();
     } else {
-      console.log(this.formulario.value);
-      let pedido: Pedido = new Pedido(
-        this.formulario.value.endereco,
-        this.formulario.value.numero,
-        this.formulario.value.complemento,
-        this.formulario.value.formaPagamento
-      );
-      this.ordemCompraService
-        .efetivarCompra(pedido)
-        .subscribe((idPedido: string) => {
-          console.log(
-            'Pedido cadastrado com sucesso. Número do pedido: ' + idPedido
-          );
-          this.idPedidoCompra = idPedido;
-        });
+      if (this.carrinhoService.exibirItens().length === 0) {
+        alert('Você não selecionou nenhum item');
+      } else {
+        console.log(this.formulario.value);
+        let pedido: Pedido = new Pedido(
+          this.formulario.value.endereco,
+          this.formulario.value.numero,
+          this.formulario.value.complemento,
+          this.formulario.value.formaPagamento,
+          this.carrinhoService.exibirItens()
+        );
+        this.ordemCompraService
+          .efetivarCompra(pedido)
+          .subscribe((idPedido: string) => {
+            this.idPedidoCompra = idPedido;
+            this.carrinhoService.limparCarrinho();
+          });
+      }
     }
   }
   public adicionar(item: ItemCarrinho): void {
@@ -76,6 +75,4 @@ export class OrdemCompraComponent implements OnInit {
   public diminuir(item: ItemCarrinho): void {
     this.carrinhoService.diminuirQuantidade(item);
   }
-
-  
 }
